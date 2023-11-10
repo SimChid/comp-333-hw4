@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import { Text, View, Button, TextInput } from "react-native";
-
+/*
 class SignInUp extends Component {
     constructor(props){
         super(props);
@@ -42,6 +42,17 @@ class SignInUp extends Component {
     
     SignUpHandler  = (event) => { // Send the HTTP request to sign up
         event.preventDefault() ;
+        fetch("http://localhost/comp-333-hw3/index.php/user/create",{
+            method : "POST",
+            body : JSON.stringify({username : this.state.username, p1 : this.state.password, p2 : this.state.confirm})
+        }).then((response) => {
+            if (response.data === "user created"){
+                this.props.setLoggedIn(true)
+            } else {
+                this.setState({information : response.data})
+            }
+        }).catch((error) => console.log(error)) ;
+        
         axios.post("http://localhost/comp-333-hw3/index.php/user/create", // Request
             {username : this.state.username,p1 : this.state.password, p2 : this.state.confirm}).then((response) => // Info
             { // What to do with the response
@@ -50,7 +61,7 @@ class SignInUp extends Component {
                 } else {
                     this.setState({information : response.data})
                 }
-            }).catch((error) => console.log(error)) ; // Handle errors
+            }).catch((error) => console.log(error)) ; // Handle errors 
     } ;
 
     render() {
@@ -99,7 +110,7 @@ class SignInUp extends Component {
                             placeholder = "Confirm Password"
                         />
                         <Button 
-                            onFormSubmit = {this.SignUpHandler}
+                            onPress = {this.SignUpHandler}
                             title = "Sign Up"
                         />
                         <Button 
@@ -113,5 +124,71 @@ class SignInUp extends Component {
     }
 
 }
+
+*/
+
+/* 
+I used ChatGPT to understand using functions instead of classes and 
+got help with setting state here.
+*/
+const SignInUp = () => {
+    const [uname,setUsername] = useState('') ;
+    const [password,setPassword] = useState('') ;
+    const [confirm,setConfirm] = useState('') ;
+    const [preferredPage,setPreferredPage] = useState('') ;
+    const [information,setInformation] = useState('Information') ;
+
+    const handleSU = (event) => {
+        print(signUpData) ;
+        event.preventDefault() ;
+        fetch("http://localhost/comp-333-hw3/index.php/user/create",{
+            method : "POST",
+            body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
+        }).then((response) => {
+            if (response.data === "user created"){
+                this.props.setLoggedIn(true)
+            } else {
+                this.setState({information : response.data})
+            }
+        }).catch((error) => console.log(error)) ;
+        // Process the form data here
+        //console.log('Form Data:', formData);
+        // You can send the data to a server, perform validation, etc.
+    };
+    const handleLI = (event) => {} ;
+
+    switch (preferredPage) {
+        case "":
+            <View>
+                <Text>Welcome to StarTunes!</Text>
+                <Text> {information} </Text>
+                <TextInput placeholder = "Username" onChangeText={(text) => setUsername(text)} />
+                <TextInput placeholder="Password" onChangeText={(text) => setPassword(text)} />
+                <Button title = "Log In" onPress = {handleLI}  />
+                <Text>New to StarTunes?</Text>
+                //<Button onPress = {setPreferredPage('Sign Up')} title = "Create Account" />
+            </View>
+
+        case "Sign Up" :
+            return (
+                <View>
+                    <TextInput placeholder="Username" onChangeText={(text) => setUsername(text)} />
+                    <TextInput placeholder="Password" onChangeText={(text) => setPassword(text)} />
+                    <TextInput placeholder="Confirm Password" onChangeText={(text) => setConfirm(text)} />  
+                    <Button title="Submit" onPress={() => handleSU()} />
+                </View>
+            ) ;
+        case "Log In" :
+            return (
+                <View>
+                    <TextInput placeholder="Username" onChangeText={(text) => setUsername(text)} />
+                    <TextInput placeholder="Password" onChangeText={(text) => setPassword(text)} />
+                    <Button title="Log In" onPress={() => handleLI()} />
+                </View>
+            ) ;  
+    }
+
+
+} ;
 
 export default SignInUp;
