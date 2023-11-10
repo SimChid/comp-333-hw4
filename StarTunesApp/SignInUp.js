@@ -11,7 +11,7 @@ const SignInUp = () => {
     const [information,setInformation] = useState([]) ;
 
     LogInHandler = (event) => { // Send the HTTP request to log in
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/user/read",{
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
             body: JSON.stringify({username: uname, p1 : password})
         }).then((response) => {
@@ -26,7 +26,7 @@ const SignInUp = () => {
     } ;
     
     SignUpHandler  = (event) => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/user/create",{
+        fetch("http://<youripaaddress>/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
         }).then((response) => {
