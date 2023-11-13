@@ -6,7 +6,7 @@ const SongList = () => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
+        fetch("http:/<youripaddress>/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {
