@@ -8,18 +8,21 @@ import SongView from './SongView';
 
 export default function App() {
   let [loggedIn,setLoggedIn] = React.useState(false);
+  const [username,setParentUsername] = useState('') ;
+
   
   if (loggedIn) {
     return(
       <View style = {styles.container}>
         <Text>Successfully logged in! </Text>
+        <Text>Welcome, {username}!</Text>
         <SongList />
       </View>
     );
   }else{
     return (
       <View style={styles.container}>
-        <SignInUp setLoggedIn = {setLoggedIn} />
+        <SignInUp setLoggedIn = {setLoggedIn} setParentUsername = {setParentUsername}/>
       </View>
     );
   }
