@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import SignInUp from './SignInUp';
 import SongList from './SongList';
+import CreateUpdate from './CreateUpdate';
+import SongView from './SongView';
 
 export default function App() {
-  let [loggedIn,setLoggedIn] = React.useState(true);
-
+  let [loggedIn,setLoggedIn] = React.useState(false);
+  
   if (loggedIn) {
     return(
       <View style = {styles.container}>
