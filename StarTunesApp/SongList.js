@@ -1,12 +1,14 @@
 import React, { Component, useState, useEffect } from "react";
 import { Text, View, ScrollView, Pressable, FlatList } from "react-native";
 
+const songRow = (props) =>
+
 const SongList = () => {
     const [myData, setData] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
+        fetch("http://192.168.1.100/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {

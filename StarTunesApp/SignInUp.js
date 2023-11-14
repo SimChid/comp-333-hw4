@@ -10,7 +10,7 @@ const SignInUp = (props) => {
     const [information,setInformation] = useState('') ;
 
     LogInHandler = () => { // Send the HTTP request to log in
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/read",{
+        fetch("http://192.168.1.100/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
             body: JSON.stringify({username: uname, password : password})
         }).then(
@@ -28,7 +28,7 @@ const SignInUp = (props) => {
     } ;
     
     SignUpHandler  = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/create",{
+        fetch("http://192.168.1.100/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
         }).then(
