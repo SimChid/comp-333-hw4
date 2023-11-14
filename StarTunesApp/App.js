@@ -16,7 +16,7 @@ export default function App() {
       <View style={styles.container}>
         <Text>Successfully logged in! </Text>
         <Text>Welcome, {username}!</Text>
-        <SongList />
+        <SongList user = {username}/>
         <CreateRating Username = {username} />
       </View>
     );

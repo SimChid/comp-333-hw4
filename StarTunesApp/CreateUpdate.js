@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { View, Text, TextInput, Button,Alert, Modal, StyleSheet, Pressable } from "react-native";
+import { View, Text, TextInput, Button, Modal, StyleSheet, Pressable } from "react-native";
 
 const RatingForm = (props) => {
     const [song,setSong] = useState("") ;
@@ -9,7 +9,7 @@ const RatingForm = (props) => {
     const [modalVisible, setModalVisible] = useState(true);
 
     CreateHandler = () => {
-        fetch("http://192.168.1.100/comp-333-hw3/index.php/song/create",
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/create",
             {method : 'POST', body : JSON.stringify({username : props.username, artist : artist, song : song, rating : rating})}).then(
                 (response) => response.json()).then(
                     (json) => {
@@ -61,11 +61,6 @@ const RatingForm = (props) => {
               </View>
             </View>
           </Modal>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}>
-            <Text style={styles.textStyle}>Show Modal</Text>
-          </Pressable>
         </View>
       );
 }
