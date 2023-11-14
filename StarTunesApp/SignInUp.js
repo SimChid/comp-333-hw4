@@ -4,7 +4,7 @@ import { Text, View, Button, TextInput } from "react-native";
 const SignInUp = (props) => {
     const [loggedIn,setLoggedIn] = useState(false) ;
     const [uname,setChildUsername] = useState('') ;
-    const [pword,setPassword] = useState('') ;
+    const [password,setPassword] = useState('') ;
     const [confirm,setConfirm] = useState('') ;
     const [preferredPage,setPreferredPage] = useState('') ;
     const [information,setInformation] = useState("") ;
