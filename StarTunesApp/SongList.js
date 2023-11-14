@@ -12,7 +12,7 @@ const SongRowPopUp = (props) => {
     const [information,setInformation] = useState("") ;
 
     DeleteHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/delete",{
             method: 'POST', body: JSON.stringify({id : props.id})}).then(
                 (response) => response.json()).then(
                     (json) => {
@@ -27,7 +27,7 @@ const SongRowPopUp = (props) => {
     } ;
 
     UpdateHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/update",
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/update",
             {method: 'POST',
             body: JSON.stringify({artist: artist, song: song,rating: rating,id: props.id})}).then(
                 (response) => response.json()).then(
@@ -55,9 +55,9 @@ const SongRowPopUp = (props) => {
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>update your rating below</Text>
                         <Text>Username: {props.user} </Text> 
-                        <TextInput onChangeText = {setSong} placeholder = "Song" value = {song} />
-                        <TextInput onChangeText = {setArtist} placeholder = "Artist" value = {artist} />
-                        <TextInput onChangeText = {setRating} placeholder = "Rating" value = {rating} />
+                        <TextInput onChangeText = {setSong} placeholder = "Song" value = {song} style = {styles.form} />
+                        <TextInput onChangeText = {setArtist} placeholder = "Artist" value = {artist} style = {styles.form} />
+                        <TextInput onChangeText = {setRating} placeholder = "Rating" value = {rating} style = {styles.form} />
                         <Pressable style = {[styles.button,styles.buttonClose]} onPress = {() => UpdateHandler()}>
                             <Text style = {styles.textStyle}>Update Rating</Text>
                         </Pressable>
@@ -77,6 +77,7 @@ const SongRowPopUp = (props) => {
         return (
             <View style={styles.centeredView}>
                 <Modal
+                    style = {styles.modal}
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
@@ -114,7 +115,7 @@ const SongRowPopUp = (props) => {
                         onRequestClose={() => {setModalVisible(!modalVisible);}}>
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Here's what the community has to say about {props.song} by {props.artist}</Text>
-                            <Text>Rating: {props.rating}</Text>
+                            <Text style={styles.rating} >{props.rating} Stars!</Text>
                             <Pressable style={styles.button} onPress = {() => setDeleting(true)}><Text>Delete Rating</Text></Pressable>
                             <Pressable style={styles.button} onPress = {() => setUpdating(true)}><Text>Update Rating</Text></Pressable>
                             <Pressable
@@ -136,7 +137,7 @@ const SongRowPopUp = (props) => {
                         onRequestClose={() => {setModalVisible(!modalVisible);}}>
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Here's what the community has to say about {props.song} by {props.artist}</Text>
-                            <Text>Rating: {props.rating}</Text>
+                            <Text style={styles.rating}>{props.rating} Stars</Text>
                             
                             <Pressable
                             style={[styles.button, styles.buttonClose]}
@@ -156,7 +157,7 @@ const SongRow = (props) =>{
     const [pressed,setPressed] = useState(false) ;
 
     DeleteHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/delete",{
             method: 'POST',
             body: JSON.stringify({id: id})
         }).then(() => Alert.alert('Delete song','Are you sure you want to delete?',[
@@ -219,7 +220,7 @@ const SongList = (props) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {
@@ -255,6 +256,17 @@ export default SongList;
 
 
 const styles = StyleSheet.create({
+    form: {
+        height: 30,
+        width: 200,
+        backgroundColor: "white",
+        marginVertical: 8,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 5,
+        paddingHorizontal: 5
+    },
     centeredView: {
       flex: 1,
       justifyContent: 'center',
@@ -263,8 +275,10 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: 'white',
+      backgroundColor: 'yellow',
       borderRadius: 20,
+      borderWidth: 3,
+      borderColor: '#c8c800',
       padding: 35,
       alignItems: 'center',
       shadowColor: '#000',
@@ -293,5 +307,11 @@ const styles = StyleSheet.create({
     modalText: {
       marginBottom: 15,
       textAlign: 'center',
+      color: "purple",
+      fontSize: 18
     },
+    rating: {
+        color: "purple",
+        fontSize: 24
+    }
   });
