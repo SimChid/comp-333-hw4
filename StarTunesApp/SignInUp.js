@@ -1,5 +1,5 @@
 import React, {Component, useState} from "react";
-import { Text, View, Button, TextInput } from "react-native";
+import { Text, View, Button, TextInput, StyleSheet } from "react-native";
 
 const SignInUp = (props) => {
     const [loggedIn,setLoggedIn] = useState(false) ;
@@ -10,7 +10,7 @@ const SignInUp = (props) => {
     const [information,setInformation] = useState('') ;
 
     LogInHandler = () => { // Send the HTTP request to log in
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/read",{
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
             body: JSON.stringify({username: uname, password : password})
         }).then(
@@ -28,7 +28,7 @@ const SignInUp = (props) => {
     } ;
     
     SignUpHandler  = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/create",{
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
         }).then(
@@ -48,25 +48,26 @@ const SignInUp = (props) => {
         case "Sign up" :
             return(
                 <View>
-                    <Text>Welcome to StarTunes!</Text>
-                    <Text> {information} </Text> 
-                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" />
-                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" />
-                    <TextInput onChangeText = {setConfirm} secureTextEntry={true} placeholder = "Confirm" />
+                    <Text style = {styles.welcome}>Welcome to StarTunes!</Text>
+                    <Text style = {styles.instruction}> {information} </Text> 
+                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" style = {styles.form} />
+                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" style = {styles.form} />
+                    <TextInput onChangeText = {setConfirm} secureTextEntry={true} placeholder = "Confirm" style = {styles.form} />
                     <Button onPress = {SignUpHandler} title = "Sign Up!" />
-                    <Text>Already have an account? Tap below to sign in!</Text>
+                    <Text style = {styles.instruction}>Already have an account? Tap below to sign in!</Text>
                     <Button onPress = {() => setPreferredPage("Log In")} title = "Log In" />
                 </View>
                 );
         case "Log In" :
             return(
                 <View>
-                    <Text>Enter Your Username and Password</Text>
-                    <Text>{information}</Text>
-                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" />
-                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" />
+                    <Text style = {styles.welcome}>Welcome back to StarTunes!</Text>
+                    <Text style = {styles.instruction}>Enter Your Username and Password</Text>
+                    <Text style = {styles.instruction}>{information}</Text>
+                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" style = {styles.form} />
+                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" style = {styles.form} />
                     <Button onPress = {LogInHandler} title = "Log In" />
-                    <Text>New to StarTunes?</Text>
+                    <Text style = {styles.instruction}>New to StarTunes?</Text>
                     <Button onPress = {() => setPreferredPage("Sign up")} title = "Create Account" />
                 </View>
             ) ;
@@ -151,3 +152,27 @@ const SignInUp = () => {
 
 
 export default SignInUp;
+
+const styles = StyleSheet.create({
+    welcome: {
+        color: 'purple',
+        fontSize: 36,
+        fontWeight: 'bold',
+        textAlign: "center"
+    },
+    form: {
+        marginHorizontal: 5,
+        backgroundColor: "white",
+        marginVertical: 8,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 5,
+        paddingHorizontal: 5
+    },
+    instruction: {
+        textAlign: "center",
+        fontSize: 18,
+        color: 'purple'
+    }
+})

@@ -9,7 +9,7 @@ const RatingForm = (props) => {
     const [modalVisible, setModalVisible] = useState(true);
 
     CreateHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/create",
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/create",
             {method : 'POST', body : JSON.stringify({username : props.username, artist : artist, song : song, rating : rating})}).then(
                 (response) => response.json()).then(
                     (json) => {
@@ -93,7 +93,7 @@ const CreateUpdate = () => {
     const [information,setInformation] = useState('');
 
     CreateHandler = () => {
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/create",
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/create",
             {method: 'POST',
             body: JSON.stringify({
                 username: uname,
@@ -107,7 +107,7 @@ const CreateUpdate = () => {
     }
 
     UpdateHandler = () => {
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/update",
+        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/update",
             {method: 'POST',
             body: JSON.stringify({
                 artist: artist,
