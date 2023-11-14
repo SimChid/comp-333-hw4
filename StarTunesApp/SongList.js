@@ -119,7 +119,7 @@ const SongRowPopUp = (props) => {
                             <Pressable style={styles.button} onPress = {() => setUpdating(true)}><Text>Update Rating</Text></Pressable>
                             <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={() => {setModalVisible(!modalVisible); props.setPRESSED(false) ;}}>
                             <Text style={styles.textStyle}>Done</Text>
                             </Pressable>
                         </View>
