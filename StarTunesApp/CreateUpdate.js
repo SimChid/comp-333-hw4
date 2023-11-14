@@ -11,7 +11,7 @@ const CreateUpdate = () => {
     const [information,setInformation] = useState('');
 
     CreateHandler = () => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/create",
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/create",
             {method: 'POST',
             body: JSON.stringify({
                 username: uname,
@@ -25,7 +25,7 @@ const CreateUpdate = () => {
     }
 
     UpdateHandler = () => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/update",
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/update",
             {method: 'POST',
             body: JSON.stringify({
                 artist: artist,
