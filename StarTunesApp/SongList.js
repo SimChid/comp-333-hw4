@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Text, View, ScrollView, Pressable, FlatList, InteractionManager,TextInput, Button, Modal, StyleSheet } from "react-native";
+import { Text, View, Pressable, FlatList,TextInput, Modal, StyleSheet } from "react-native";
 
 const SongRowPopUp = (props) => {
     const [deleting,setDeleting] = useState(false) ;
@@ -43,7 +43,6 @@ const SongRowPopUp = (props) => {
     } ;
 
     if (updating){
-        // Want to return a form to update, with a button for cancelling at the bottom
         return (
             <View style={styles.centeredView}>
                 <Modal
@@ -62,10 +61,8 @@ const SongRowPopUp = (props) => {
                             <Text style = {styles.textStyle}>Update Rating</Text>
                         </Pressable>
                         <Text style = {styles.modalText}>{information}</Text>
-                        <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={() => {setModalVisible(!modalVisible); setUpdating(false);}}>
-                        <Text style={styles.textStyle}>Cancel</Text>
+                        <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setModalVisible(!modalVisible); setUpdating(false);}}>
+                            <Text style={styles.textStyle}>Cancel</Text>
                         </Pressable>
                     </View>
                     </View>
@@ -140,7 +137,7 @@ const SongRowPopUp = (props) => {
                             
                             <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={() => {setModalVisible(!modalVisible); props.setPRESSED(false) ;}}>
                             <Text style={styles.textStyle}>Done</Text>
                             </Pressable>
                         </View>
@@ -154,26 +151,6 @@ const SongRowPopUp = (props) => {
 
 const SongRow = (props) =>{
     const [pressed,setPressed] = useState(false) ;
-
-    DeleteHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
-            method: 'POST',
-            body: JSON.stringify({id: id})
-        }).then(() => Alert.alert('Delete song','Are you sure you want to delete?',[
-            {
-                text: 'cancel',
-                style: 'cancel'
-            },{
-                text: 'delete',
-            }
-        ])).catch((error) => console.log(error))
-
-    } ;
-    UpdateHandler = () => {
-
-    } ;
-
-    
     if (pressed){
         return (
             <View>
@@ -185,32 +162,10 @@ const SongRow = (props) =>{
                     song = {props.song}
                     artist = {props.artist}
                     rating = {props.rating}
-                    id = {props.id}
-                />      
+                    id = {props.id} />      
             </View>);
     } else {
-        return <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>; //"By" props.artist{props.song}
-        
-    }
-    if (props.username == props.user){
-        return ( 
-            <View>
-                <Text>Song: {props.song}</Text>
-                <Text>Artist: {props.artist}</Text>
-                <Text>Rating: {props.rating}</Text>
-                <Text>This is where the delete button will go</Text>
-                <Text>This is where the update button will go</Text>
-            </View>
-        ) ; // Extra functionality in this case.
-
-    } else {
-        return (
-            <View>
-                <Text>Song: {props.song}</Text>
-                <Text>Artist: {props.artist}</Text>
-                <Text>Rating: {props.rating}</Text>
-            </View>
-        ) ;
+        return <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>;
     }
 }
 
@@ -225,7 +180,7 @@ const SongList = (props) => {
         .catch((error) => {
             console.log(error)
         }).finally(() => setLoading(false))
-    }, []);
+    });
 
     return (
         <View>
@@ -243,8 +198,9 @@ const SongList = (props) => {
                             song = {item.song}
                             artist = {item.artist}
                             rating = {item.rating}
-                            id = {item.id} />
-                      )}
+                            id = {item.id}/>
+                            )
+                        }
                 />
             )}
         </View>

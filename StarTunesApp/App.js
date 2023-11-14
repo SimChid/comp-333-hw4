@@ -1,23 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import SignInUp from './SignInUp';
 import SongList from './SongList';
 import CreateRating from './CreateUpdate';
-import SongView from './SongView';
 
 export default function App() {
   let [loggedIn,setLoggedIn] = React.useState(false);
   const [username,setParentUsername] = useState('') ;
-
   
   if (loggedIn) {
     return(
       <View style={styles.container}>
         <Text>Successfully logged in! </Text>
         <Text>Welcome, {username}!</Text>
-        <SongList user = {username}/>
-        <CreateRating Username = {username} />
+        <SongList user = {username} />
+        <CreateRating Username = {username}/>
       </View>
     );
   }else{
