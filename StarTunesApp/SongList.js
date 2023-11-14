@@ -190,28 +190,7 @@ const SongRow = (props) =>{
                 />      
             </View>);
     } else {
-        return <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>; //"By" props.artist{props.song}
-        
-    }
-    if (props.username == props.user){
-        return ( 
-            <View>
-                <Text>Song: {props.song}</Text>
-                <Text>Artist: {props.artist}</Text>
-                <Text>Rating: {props.rating}</Text>
-                <Text>This is where the delete button will go</Text>
-                <Text>This is where the update button will go</Text>
-            </View>
-        ) ; // Extra functionality in this case.
-
-    } else {
-        return (
-            <View>
-                <Text>Song: {props.song}</Text>
-                <Text>Artist: {props.artist}</Text>
-                <Text>Rating: {props.rating}</Text>
-            </View>
-        ) ;
+        return <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>; 
     }
 }
 
@@ -226,7 +205,7 @@ const SongList = (props) => {
         .catch((error) => {
             console.log(error)
         }).finally(() => setLoading(false))
-    }, []);
+    });
 
     return (
         <View>
