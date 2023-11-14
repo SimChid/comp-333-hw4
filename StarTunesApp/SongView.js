@@ -7,7 +7,7 @@ const SongView = () => {
     const [id,setId] = useState(3);
 
     useEffect(() => {
-        fetch("http://192.168.1.100/comp-333-hw3/index.php/song/read?id=${id}",{
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/read?id=${id}",{
             method: 'GET',
         }).then((response) => response.json())
         .then((json) => setData(json))
