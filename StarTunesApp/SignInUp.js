@@ -7,12 +7,12 @@ const SignInUp = (props) => {
     const [password,setPassword] = useState('') ;
     const [confirm,setConfirm] = useState('') ;
     const [preferredPage,setPreferredPage] = useState('') ;
-    const [information,setInformation] = useState("") ;
+    const [information,setInformation] = useState('') ;
 
     LogInHandler = () => { // Send the HTTP request to log in
         fetch("http://172.21.229.198/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
-            body: JSON.stringify({username: uname, password : pword})
+            body: JSON.stringify({username: uname, password : password})
         }).then(
             (response) => response.json()).then(
                 (json) => {
