@@ -1,102 +1,82 @@
-import axios from "axios";
 import React, {Component, useState} from "react";
 import { Text, View, Button, TextInput } from "react-native";
 
-const SignInUp = () => {
+const SignInUp = (props) => {
     const [loggedIn,setLoggedIn] = useState(false) ;
-    const [uname,setUsername] = useState('') ;
-    const [password,setPassword] = useState('') ;
+    const [uname,setChildUsername] = useState('') ;
+    const [pword,setPassword] = useState('') ;
     const [confirm,setConfirm] = useState('') ;
     const [preferredPage,setPreferredPage] = useState('') ;
-    const [information,setInformation] = useState([]) ;
+    const [information,setInformation] = useState("") ;
 
-    LogInHandler = (event) => { // Send the HTTP request to log in
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/user/read",{
+    LogInHandler = () => { // Send the HTTP request to log in
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
-            body: JSON.stringify({username: uname, p1 : password})
-        }).then((response) => {
-            let output = response.json()
-            if(output === "login success"){
-                setLoggedIn(true)
-            } else {
-                setInformation(output)
-            }
-        }).catch((error) => console.log(error)) ;
+            body: JSON.stringify({username: uname, password : pword})
+        }).then(
+            (response) => response.json()).then(
+                (json) => {
+                    if (json === "login success"){
+                        props.setLoggedIn(true)
+                        props.setParentUsername(uname)
+                    } else {
+                        setInformation(json)                        
+                    }
+                }
+            ).catch((error) => console.log(error)) ;
 
     } ;
     
-    SignUpHandler  = (event) => {
-        fetch("http://<youripaaddress>/comp-333-hw3/index.php/user/create",{
+    SignUpHandler  = () => {
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
-        }).then((response) => {
-            let output = response.json()
-            if (output === "user created"){
-                setLoggedIn(true)
-            } else {
-                setInformation(output)
-            }
-        }).catch((error) => console.log(error)) ;
-        // Process the form data here
-        //console.log('Form Data:', formData);
-        // You can send the data to a server, perform validation, etc.
+        }).then(
+            (response) => response.json()).then(
+                (json) => {
+                    if (json === "user created"){
+                        //setInformation(json)
+                        props.setLoggedIn(true)
+                        props.setParentUsername(uname)
+                    } else {
+                        setInformation(json)
+                    }
+                }).catch((error) => console.log(error)) ;
     };
 
-    switch (this.prefferedPage) {
+    switch (preferredPage) {
         case "Sign up" :
             return(
                 <View>
                     <Text>Welcome to StarTunes!</Text>
-                    {/*<Text> {information} </Text> */}
-                    <TextInput
-                        onChangeText = {setUsername}
-                        placeholder = "Username"
-                    />
-                    <TextInput
-                        onChangeText = {setPassword}
-                        secureTextEntry={true}
-                        placeholder = "Password"
-                    />
-                    <Button 
-                        onPress = {LogInHandler}
-                        title = "Log In"
-                    />
-                    <Text>New to StarTunes?</Text>
-                    <Button 
-                        onPress = {() => setPreferredPage("Sign up")}
-                        title = "Create Account"
-                    />
+                    <Text> {information} </Text> 
+                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" />
+                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" />
+                    <TextInput onChangeText = {setConfirm} secureTextEntry={true} placeholder = "Confirm" />
+                    <Button onPress = {SignUpHandler} title = "Sign Up!" />
+                    <Text>Already have an account? Tap below to sign in!</Text>
+                    <Button onPress = {() => setPreferredPage("Log In")} title = "Log In" />
                 </View>
                 );
+        case "Log In" :
+            return(
+                <View>
+                    <Text>Enter Your Username and Password</Text>
+                    <Text>{information}</Text>
+                    <TextInput onChangeText = {setChildUsername} placeholder = "Username" />
+                    <TextInput onChangeText = {setPassword} secureTextEntry={true} placeholder = "Password" />
+                    <Button onPress = {LogInHandler} title = "Log In" />
+                    <Text>New to StarTunes?</Text>
+                    <Button onPress = {() => setPreferredPage("Sign up")} title = "Create Account" />
+                </View>
+            ) ;
         default :
             return(
                 <View>
-                    <Text>Create an account: </Text>
-                    {/* <Text>{information}</Text> */}
-                    <TextInput 
-                        onChangeText = {setUsername} 
-                        placeholder = "Username"
-                    />
-                    <TextInput
-                        onChangeText = {setPassword}
-                        secureTextEntry = {true}
-                        placeholder = "Password"
-                    />
-                    <TextInput
-                        onChangeText = {setConfirm}
-                        secureTextEntry = {true}
-                        placeholder = "Confirm Password"
-                    />
-                    <Button 
-                        onPress = {SignUpHandler}
-                        title = "Sign Up"
-                    />
-                    <Button 
-                        onPress = {() => setPreferredPage('')}
-                        title = "Return to Login"
-                    />
+                    <Button onPress = {() => setPreferredPage("Sign up")} title = "Create Account" />
+                    <Button onPress = {() => setPreferredPage("Log In")} title = "Sign In" />
                 </View>
-            )
+            );
     }
 
 }

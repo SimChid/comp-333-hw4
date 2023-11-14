@@ -7,7 +7,7 @@ const SongView = () => {
     const [id,setId] = useState(3);
 
     useEffect(() => {
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/read?id=${id}",{
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/read?id=${id}",{
             method: 'GET',
         }).then((response) => response.json())
         .then((json) => setData(json))
@@ -15,7 +15,7 @@ const SongView = () => {
     },[]);
 
     const DeleteHandler = () => {
-        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/delete",{
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
             method: 'POST',
             body: JSON.stringify({id: id})
         }).then(() => Alert.alert('Delete song','Are you sure you want to delete?',[
