@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import SignInUp from './SignInUp';
 import SongList from './SongList';
-import CreateUpdate from './CreateUpdate';
+import CreateRating from './CreateUpdate';
 import SongView from './SongView';
 
 export default function App() {
@@ -13,10 +13,11 @@ export default function App() {
   
   if (loggedIn) {
     return(
-      <View style = {styles.container}>
+      <View style={styles.container}>
         <Text>Successfully logged in! </Text>
         <Text>Welcome, {username}!</Text>
         <SongList />
+        <CreateRating Username = {username} />
       </View>
     );
   }else{
@@ -34,5 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal:25,
+    marginVertical:100
   },
 });
