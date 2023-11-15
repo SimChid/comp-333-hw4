@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import SignInUp from './SignInUp';
 import SongList from './SongList';
 import CreateRating from './CreateUpdate';
-import SongView from './SongView';
 
 export default function App() {
   let [loggedIn,setLoggedIn] = React.useState(false);
