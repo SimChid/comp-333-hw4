@@ -4,10 +4,12 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import SignInUp from './SignInUp';
 import SongList from './SongList';
 import CreateRating from './CreateUpdate';
+import DropDown from './SortingDropDown';
 
 export default function App() {
   let [loggedIn,setLoggedIn] = React.useState(false);
   const [username,setParentUsername] = useState('') ;
+  const [sortBy, setSortBy] = useState('artist') ;
 
   const LogOut = () => {
     setLoggedIn(false);
@@ -19,8 +21,11 @@ export default function App() {
       <View style={styles.container}>
         <Text style = {styles.welcome} ></Text>
         <Text style = {styles.welcome} >Welcome, {username}!</Text>
-        <SongList user = {username}/>
+        <Text style = {styles.welcome}> Select how to sort the song list</Text>
+        <DropDown SortBy = {setSortBy}/>
         <CreateRating Username = {username} />
+        <SongList user = {username} sortBy = {sortBy}/>
+        
         <Button 
           onPress = {LogOut}
           title = "Log out"
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 25,
-    paddingVertical:100
+    paddingVertical:125
   },
   welcome: {
     paddingTop: 10,
