@@ -3,7 +3,7 @@ Mobile app for creating music
 
 All files are stored in the StarTunesApp. The backend for this app can be found in the repo at [this link]([https://link-url-here.org](https://github.com/SimChid/comp-333-hw3)https://github.com/SimChid/comp-333-hw3). 
 
-The work on this project was an even 50-50 split between Simon and I.
+The work on this project was an even 50-50 split between Simon and Aaron.
 
 ## App.js
 
