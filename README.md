@@ -3,6 +3,8 @@ Mobile app for creating music
 
 All files are stored in the StarTunesApp. The backend for this app can be found in the repo at [this link]([https://link-url-here.org](https://github.com/SimChid/comp-333-hw3)https://github.com/SimChid/comp-333-hw3). 
 
+The work on this project was an even 50-50 split between Simon and I.
+
 ## App.js
 
 The `App` component is more or less the parent component that organizes the page, tracking the logged in status of the user, and from that controlling what content is visible. At the bottom is styling.
