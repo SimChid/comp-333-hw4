@@ -12,7 +12,7 @@ const SongRowPopUp = (props) => {
     const [information,setInformation] = useState("") ;
 
     DeleteHandler = () => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/delete",{
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
             method: 'POST', body: JSON.stringify({id : props.id})}).then(
                 (response) => response.json()).then(
                     (json) => {
@@ -27,7 +27,7 @@ const SongRowPopUp = (props) => {
     } ;
 
     UpdateHandler = () => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/update",
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/update",
             {method: 'POST',
             body: JSON.stringify({artist: artist, song: song,rating: rating,id: props.id})}).then(
                 (response) => response.json()).then(
@@ -155,26 +155,6 @@ const SongRowPopUp = (props) => {
 
 const SongRow = (props) =>{
     const [pressed,setPressed] = useState(false) ;
-
-    DeleteHandler = () => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/delete",{
-            method: 'POST',
-            body: JSON.stringify({id: id})
-        }).then(() => Alert.alert('Delete song','Are you sure you want to delete?',[
-            {
-                text: 'cancel',
-                style: 'cancel'
-            },{
-                text: 'delete',
-            }
-        ])).catch((error) => console.log(error))
-
-    } ;
-    UpdateHandler = () => {
-
-    } ;
-
-    
     if (pressed){
         return (
             <View>
@@ -210,7 +190,7 @@ const SongList = (props) => {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/song/enumerate", {method: 'GET'})
+        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/sort", {method: 'POST',body : JSON.stringify({val : props.sortBy})})
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {
