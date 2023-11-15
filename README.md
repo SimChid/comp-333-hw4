@@ -5,6 +5,10 @@ All files are stored in the StarTunesApp. The backend for this app can be found 
 
 The work on this project was an even 50-50 split between Simon and Aaron.
 
+To run the app, clone the repository, navigate to make StarTunesApp your working directory, and then input the command `npm run android` while you have an emulator from android studio open and running. This should automatically open up the app Expo Go in the emulator (it should also auto-install the app if it wasn't already installed). To get the app to load, you will have to install the SelectList component using the command `npm install react-native-dropdown-select-list` (if it is not already installed).
+
+Once the app is opened and running, click to log in or sign up and follow the prompts to accomplish that. Once your session is associated with an account (by logging in or signing up), there will be a list of songs on the main page. The songs for which you are the rater will have options to update or delete the rating once you tap on them. For the rest, tapping on them will bring up the rating, but no option to modify or delete the rating.
+
 ## App.js
 
 The `App` component is more or less the parent component that organizes the page, tracking the logged in status of the user, and from that controlling what content is visible. At the bottom is styling.
