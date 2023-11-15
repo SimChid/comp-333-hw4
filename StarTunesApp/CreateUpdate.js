@@ -34,16 +34,19 @@ const RatingForm = (props) => {
                 
                 <Text>Username: {props.username} </Text> 
                 <TextInput 
+                    style = {styles.form}
                     onChangeText = {setSong}
                     placeholder = "Song"
                     value = {song}
                 />
                 <TextInput
+                    style = {styles.form}
                     onChangeText = {setArtist}
                     placeholder = "Artist"
                     value = {artist}
                 />
                 <TextInput
+                    style = {styles.form}
                     onChangeText = {setRating}
                     placeholder = "Rating"
                     value = {rating}
@@ -72,7 +75,7 @@ const CreateRating = (props) => {
     } else {
         return (
             <View>
-                <Text>Add a song rating below!</Text>
+                <Text style = {styles.modalText}>Add a song rating below!</Text>
                 <Button onPress = {() => setRatingCurrently(true)} title = "Chime in" />
             </View>
         ) ;
@@ -90,8 +93,10 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: 'white',
+      backgroundColor: 'yellow',
       borderRadius: 20,
+      borderWidth: 3,
+      borderColor: '#c8c800',
       padding: 35,
       alignItems: 'center',
       shadowColor: '#000',
@@ -120,7 +125,19 @@ const styles = StyleSheet.create({
     modalText: {
       marginBottom: 15,
       textAlign: 'center',
+      color: 'purple',
     },
+    form: {
+      height: 30,
+      width: 200,
+      backgroundColor: "white",
+      marginVertical: 8,
+      fontSize: 14,
+      borderWidth: 1,
+      borderColor: 'black',
+      borderRadius: 5,
+      paddingHorizontal: 5
+  },
   });
 
 export default CreateRating
