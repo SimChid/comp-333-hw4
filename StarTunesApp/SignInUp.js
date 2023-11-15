@@ -1,7 +1,8 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import { Text, View, Button, TextInput, StyleSheet } from "react-native";
 
 const SignInUp = (props) => {
+    // Setting initial states
     const [loggedIn,setLoggedIn] = useState(false) ;
     const [uname,setChildUsername] = useState('') ;
     const [password,setPassword] = useState('') ;
@@ -10,7 +11,7 @@ const SignInUp = (props) => {
     const [information,setInformation] = useState('') ;
 
     LogInHandler = () => { // Send the HTTP request to log in
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/read",{
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/user/read",{
             method: "POST" ,
             body: JSON.stringify({username: uname, password : password})
         }).then(
@@ -27,8 +28,8 @@ const SignInUp = (props) => {
 
     } ;
     
-    SignUpHandler  = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/user/create",{
+    SignUpHandler  = () => { // Send the HTTP request to create a new user, i.e. register
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : uname, p1 : password, p2 : confirm})
         }).then(
@@ -45,6 +46,7 @@ const SignInUp = (props) => {
     };
 
     switch (preferredPage) {
+        // If the user is signing up
         case "Sign up" :
             return(
                 <View>
@@ -58,6 +60,7 @@ const SignInUp = (props) => {
                     <Button onPress = {() => setPreferredPage("Log In")} title = "Log In" />
                 </View>
                 );
+        // If the user is logging in on an account that already exists
         case "Log In" :
             return(
                 <View>
@@ -72,6 +75,7 @@ const SignInUp = (props) => {
                 </View>
             ) ;
         default :
+        // Initial state of the login screen so the user can choose to login or sign up
             return(
                 <View>
                     <Button onPress = {() => setPreferredPage("Sign up")} title = "Create Account" />
@@ -85,6 +89,8 @@ const SignInUp = (props) => {
 
 
 /*
+Everything below this line and above the stylesheet are dev notes and test cases.
+
 I used ChatGPT to understand using functions instead of classes and 
 got help with setting state here.
 
@@ -99,7 +105,7 @@ const SignInUp = () => {
     const handleSU = (event) => {
         //print(signUpData) ;
         //event.preventDefault() ;
-        fetch("http://172.21.68.84/comp-333-hw3/index.php/user/create",{
+        fetch("http://<ip>/comp-333-hw3/index.php/user/create",{
             method : "POST",
             body : JSON.stringify({username : "Jim", p1 : "jimjam", p2 : "jimjam"})
         }).then((response) => {

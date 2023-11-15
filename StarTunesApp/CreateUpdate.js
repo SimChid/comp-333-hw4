@@ -8,13 +8,13 @@ const RatingForm = (props) => {
     const [information,setInformation] = useState("") ;
     const [modalVisible, setModalVisible] = useState(true);
 
-    CreateHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/create",
+    CreateHandler = () => { // Sending HTTP request to create a new song entry
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/create",
             {method : 'POST', body : JSON.stringify({username : props.username, artist : artist, song : song, rating : rating})}).then(
                 (response) => response.json()).then(
                     (json) => {
                         if (json === 'song added'){
-                            props.setRATING(false)  // might change this
+                            props.setRATING(false) 
                         } else {
                             setInformation(json)
                         }
@@ -22,6 +22,7 @@ const RatingForm = (props) => {
     } ;
 
     return (
+      //Modal for creating new song entry
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -71,8 +72,10 @@ const RatingForm = (props) => {
 const CreateRating = (props) => {
     const [ratingCurrently,setRatingCurrently] = useState(false) ;
     if (ratingCurrently){
+        // If the user is creating a new entry; creates a modal
         return <RatingForm username = {props.Username} setRATING = {setRatingCurrently}/> ;
     } else {
+        //Button to allow the user to create a new rating
         return (
             <View>
                 <Text style = {styles.modalText}>Add a song rating below!</Text>
