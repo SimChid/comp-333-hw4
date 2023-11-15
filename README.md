@@ -9,6 +9,17 @@ To run the app, clone the repository, navigate to make StarTunesApp your working
 
 Once the app is opened and running, click to log in or sign up and follow the prompts to accomplish that. Once your session is associated with an account (by logging in or signing up), there will be a list of songs on the main page. The songs for which you are the rater will have options to update or delete the rating once you tap on them. For the rest, tapping on them will bring up the rating, but no option to modify or delete the rating.
 
+Please note that you have to put your ip address in the following locations:
+- CreateUpdate:
+-   12
+- SignInUp:
+-   14
+-   32
+- SongList:
+-   17
+-   33
+-   202
+
 ## App.js
 
 The `App` component is more or less the parent component that organizes the page, tracking the logged in status of the user, and from that controlling what content is visible. At the bottom is styling.
