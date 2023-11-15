@@ -1,7 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
-import { Text, View, ScrollView, Pressable, FlatList, InteractionManager,TextInput, Button, Modal, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, Pressable, FlatList, TextInput, Modal, StyleSheet } from "react-native";
 
 const SongRowPopUp = (props) => {
+    // Initializing states for updating and deleting
     const [deleting,setDeleting] = useState(false) ;
     const [updating,setUpdating] = useState(false) ;
     const [modalVisible, setModalVisible] = useState(true);
@@ -12,12 +13,13 @@ const SongRowPopUp = (props) => {
     const [information,setInformation] = useState("") ;
 
     DeleteHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/delete",{
+        // Sends delete values to API
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/delete",{
             method: 'POST', body: JSON.stringify({id : props.id})}).then(
                 (response) => response.json()).then(
                     (json) => {
                         if (json === 'song deleted'){
-                            setDeleting(false)  // might change this
+                            setDeleting(false)
                             props.setPRESSED(false)
                             setModalVisible(false)
                         } else {
@@ -27,7 +29,8 @@ const SongRowPopUp = (props) => {
     } ;
 
     UpdateHandler = () => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/update",
+        // Sends update values to API
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/update",
             {method: 'POST',
             body: JSON.stringify({artist: artist, song: song,rating: rating,id: props.id})}).then(
                 (response) => response.json()).then(
@@ -74,6 +77,7 @@ const SongRowPopUp = (props) => {
         ) ;
 
     } else if (deleting) {
+        //similar view to updating but with options to delete a song instead
         return (
             <View style={styles.centeredView}>
                 <Modal
@@ -106,6 +110,7 @@ const SongRowPopUp = (props) => {
 
     } else {
         if (props.user == props.username){
+            // View when user has rated the song so that they could update/delete their entires
             return (
                 <View style={styles.centeredView}>
                     <Modal
@@ -128,6 +133,7 @@ const SongRowPopUp = (props) => {
                 </View>
             ) ;
         } else {
+            //User can only view the entry
             return (
                 <View style={styles.centeredView}>
                     <Modal
@@ -154,8 +160,10 @@ const SongRowPopUp = (props) => {
 }
 
 const SongRow = (props) =>{
+    //Creater interactable buttons to open a modal for a song
     const [pressed,setPressed] = useState(false) ;
     if (pressed){
+        //When the button for a song is pressed to send information to modal
         return (
             <View>
                 <Pressable 
@@ -175,6 +183,7 @@ const SongRow = (props) =>{
                 />      
             </View>);
     } else {
+        //When button is not pressed.
         return (
             <Pressable
                 onPress = {() => setPressed(true)}
@@ -188,9 +197,9 @@ const SongRow = (props) =>{
 const SongList = (props) => {
     const [myData, setData] = useState([]);
     const [isLoading, setLoading] = useState(true);
-
+    // So that the user can sort the songs in the list (part 2 of hw4)
     useEffect(() => {
-        fetch("http://172.21.229.198/comp-333-hw3/index.php/song/sort", {method: 'POST',body : JSON.stringify({val : props.sortBy})})
+        fetch("http://<youripaddress>/comp-333-hw3/index.php/song/sort", {method: 'POST',body : JSON.stringify({val : props.sortBy})})
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => {
@@ -198,16 +207,17 @@ const SongList = (props) => {
         }).finally(() => setLoading(false))
     });
 
+    //Actual view of the songlist
     return (
-        <View>
+        <View style = {{height:500, paddingVertical: 30}}>
             {isLoading ? (
                 (<Text> Loading... </Text>)
             ) : (
                 <FlatList 
-                    style = {styles.list}
                     data = {myData}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
+                        
                         <SongRow 
                             user = {props.user} 
                             username = {item.username} 
@@ -215,6 +225,7 @@ const SongList = (props) => {
                             artist = {item.artist}
                             rating = {item.rating}
                             id = {item.id} />
+                        
                       )}
                 />
             )}
@@ -226,9 +237,6 @@ export default SongList;
 
 
 const styles = StyleSheet.create({
-    list: {
-        flex: 5
-    },
     pressed: {
         backgroundColor: '#763568',
         border: 1,
@@ -244,7 +252,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
     },
     song: {
-        color: '#ddd',
+        color: '#FDFDFD',
         fontSize: 24,
         padding: 12
     },
@@ -305,5 +313,5 @@ const styles = StyleSheet.create({
     rating: {
         color: "purple",
         fontSize: 24
-    }
+    },
   });
