@@ -44,3 +44,7 @@ The component `SongRowPopUp` allows for updating and deleting functionality (onl
 Provides the `DropDown` component which is the dropdown to choose how to sort the song rating list.
 ## Remaining Files
 The other files and directories are for running the app, created by React Native, and not modified in the development process.
+
+## Additional feature:
+
+We added dropdown menu to slect how the songs are sorted in the list, as explained in the **SrotingDropDown.js** section above. Click the dropdown menu inside the app and select how you want to sort the songs.
