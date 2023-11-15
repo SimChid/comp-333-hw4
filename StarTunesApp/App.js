@@ -17,7 +17,7 @@ export default function App() {
   if (loggedIn) {
     return(
       <View style={styles.container}>
-        <Text style = {styles.welcome} >Successfully logged in! </Text>
+        <Text style = {styles.welcome} ></Text>
         <Text style = {styles.welcome} >Welcome, {username}!</Text>
         <SongList user = {username}/>
         <CreateRating Username = {username} />
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     paddingVertical:100
   },
   welcome: {
+    paddingTop: 10,
     color: 'purple',
     fontSize: 24
   }

@@ -120,7 +120,7 @@ const SongRowPopUp = (props) => {
                             <Pressable style={styles.button} onPress = {() => setUpdating(true)}><Text>Update Rating</Text></Pressable>
                             <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={() => {setModalVisible(!modalVisible); props.setPRESSED(false);}}>
                             <Text style={styles.textStyle}>Done</Text>
                             </Pressable>
                         </View>
@@ -141,7 +141,7 @@ const SongRowPopUp = (props) => {
                             
                             <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={() => {setModalVisible(!modalVisible); props.setPRESSED(false);}}>
                             <Text style={styles.textStyle}>Done</Text>
                             </Pressable>
                         </View>
@@ -178,7 +178,12 @@ const SongRow = (props) =>{
     if (pressed){
         return (
             <View>
-                <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>
+                <Pressable 
+                    onPress = {() => setPressed(true)}
+                    style = {styles.pressed}
+                >
+                    <Text style = {styles.song}>{props.song} By {props.artist}</Text>
+                </Pressable>
                 <SongRowPopUp 
                     setPRESSED = {setPressed}
                     username = {props.username} 
@@ -190,7 +195,13 @@ const SongRow = (props) =>{
                 />      
             </View>);
     } else {
-        return <Pressable onPress = {() => setPressed(true)}><Text>{props.song} By {props.artist}</Text></Pressable>; 
+        return (
+            <Pressable
+                onPress = {() => setPressed(true)}
+                style = {styles.notPressed}
+            >
+                <Text style = {styles.song}>{props.song} By {props.artist}</Text>
+            </Pressable>); 
     }
 }
 
@@ -213,7 +224,7 @@ const SongList = (props) => {
                 (<Text> Loading... </Text>)
             ) : (
                 <FlatList 
-                
+                    style = {styles.list}
                     data = {myData}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
@@ -235,6 +246,28 @@ export default SongList;
 
 
 const styles = StyleSheet.create({
+    list: {
+        flex: 5
+    },
+    pressed: {
+        backgroundColor: '#763568',
+        border: 1,
+        borderColor: '#5B3256',
+        borderRatius: 5,
+        marginVeritcal: 5,
+    },
+    notPressed: {
+        backgroundColor: 'purple',
+        border: 1,
+        borderColor: '#5B3256',
+        borderRadius: 5,
+        marginVertical: 5,
+    },
+    song: {
+        color: '#ddd',
+        fontSize: 24,
+        padding: 12
+    },
     form: {
         height: 30,
         width: 200,
