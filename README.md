@@ -21,6 +21,8 @@ This file has all of the components related to signing in and signing up. The co
 
 The component `SongRowPopUp` allows for updating and deleting functionality (only for the song ratings that the signed in user has posted). It controls the page that pops up when a song is selected from the listing of songs. The component `SongRow` is the component that is generated for each song in the database when it is queried and put into the list that appears in the middle of the screen. The component `SongList` is responsible for querying the database to get the data that is put into the components. This query is then fed item by item to create the list of `SongRow` components. At the bottom is some styling.
 
+## SortingDropDown.js
 
+Provides the `DropDown` component which is the dropdown to choose how to sort the song rating list.
 ## Remaining Files
 The other files and directories are for running the app, created by React Native, and not modified in the development process.
