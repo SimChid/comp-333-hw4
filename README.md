@@ -1,7 +1,7 @@
 # comp-333-hw4
 Mobile app for creating music
 
-All files are stored in the StarTunesApp. The backend for this app can be found in the repo at [this link](https://github.com/SimChid/comp-333-hw3#backend). 
+All files are stored in the StarTunesApp. The backend for this app can be found in the repo at [this link](https://github.com/SimChid/comp-333-hw3). Instructions to install will be in the README file.
 
 The work on this project was an even 50-50 split between Simon and Aaron.
 
@@ -12,16 +12,16 @@ Once the app is opened and running, click to log in or sign up and follow the pr
 Please note that you have to put your ip address in the following locations:
 
 CreateUpdate:
--   12
+-   Line 12
 
 SignInUp:
--   14
--   32
+-   Line 14
+-   Line 32
 
 SongList:
--   17
--   33
--   202
+-   Line 17
+-   Line 33
+-   Line 202
 
 ## App.js
 
